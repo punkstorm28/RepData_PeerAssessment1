@@ -14,14 +14,14 @@ plot1<- qplot(stepsbyday, xlab='Total steps per day', ylab='Frequency')
 print(plot1)
 ```
 ============
-##Mean and median of the total number of steps taken per day
+Mean and median of the total number of steps taken per day
 ```{r}
 stepsByDayMean <- mean(stepsbyday)
 stepsByDayMedian <- median(stepsbyday)
 stepsByDayMean
 stepsByDayMedian
 ```
-##What is the average daily activity pattern?
+What is the average daily activity pattern?
 ```{r}
 averageStepsPerTime <- aggregate(x=list(meanSteps=dataset$steps), by=list(interval=dataset$interval), FUN=mean, na.rm=TRUE)
 ggplot(data=averageStepsPerTime, aes(x=interval, y=meanSteps)) +
@@ -30,13 +30,13 @@ ggplot(data=averageStepsPerTime, aes(x=interval, y=meanSteps)) +
   ylab("average number of steps taken") 
 ```
 ==========
-##Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```{r}
 mostSteps <- which.max(averageStepsPerTime$meanSteps)
 timeMostSteps <-  gsub("([0-9]{1,2})([0-9]{2})", "\\1:\\2", averageStepsPerTime[mostSteps,'interval'])
 timeMostSteps
 ```
-##Imputing missing values
+Imputing missing values
 Total number of missing values in the dataset
 ```{r}
 MissingValues <- length(which(is.na(dataset$steps)))
@@ -73,7 +73,7 @@ Mean and Median of the steps taken
 mean(new_steps$Total)
 median(new_steps$Total)
 ```
-##Are there differences in activity patterns between weekdays and weekends?
+Are there differences in activity patterns between weekdays and weekends?
 ```{r}
 new_dataset$WeekendOrWeekday <- ifelse(weekdays(as.Date(new_dataset$date)) %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"), "Weekday", "Weekend")
 head(new_dataset)
